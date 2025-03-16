@@ -38,14 +38,16 @@ class Router {
       // This could be a [service] route
       $service = $matches[1];
       if (file_exists(STATIC_PATH . '/' . $service . '.html')) {
-        // Explicitly set the content type and ensure inline display for service pages
+      // Force content type and inline display for service pages
         header('Content-Type: text/html; charset=UTF-8');
         header('Content-Disposition: inline');
+      // Add more aggressive caching control
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
         $this->serveFile('/' . $service . '.html');
         return;
       }
     }
-    
     // Handle dynamic routes for service locations
     if (preg_match('|^/([^/]+)/([^/]+)$|', $path, $matches)) {
       // This could be a [service]/[location] route
@@ -85,8 +87,11 @@ class Router {
     switch ($ext) {
       case 'html':
         header('Content-Type: text/html; charset=UTF-8');
-        // Force HTML to display inline in browser, not as a download
+        // Force display in browser
         header('Content-Disposition: inline');
+        // Prevent caching issues
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
         break;
       case 'css':
         header('Content-Type: text/css; charset=UTF-8');
