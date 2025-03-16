@@ -23,9 +23,27 @@ AddType text/css .css
 AddType image/svg+xml .svg
 AddType application/json .json
 
-# Enable CORS
+# Enable CORS and set HTML file handling
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "*"
+    
+    # Force HTML files to be displayed in browser, not downloaded
+    <FilesMatch "\.html$">
+        Header set Content-Type "text/html; charset=UTF-8"
+        Header set Content-Disposition "inline"
+    </FilesMatch>
+    
+    # Force service pages without extensions to be treated as HTML
+    <FilesMatch "^(ai-automation|business-process-automation|business-process-documentation)$">
+        Header set Content-Type "text/html; charset=UTF-8"
+        Header set Content-Disposition "inline"
+    </FilesMatch>
+    
+    # Force location pages to be treated as HTML
+    <FilesMatch "^([^/]+)/([^/]+)$">
+        Header set Content-Type "text/html; charset=UTF-8"
+        Header set Content-Disposition "inline"
+    </FilesMatch>
 </IfModule>
 
 # Browser caching
