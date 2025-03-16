@@ -1,23 +1,11 @@
-# Special .htaccess file for Windows browser compatibility
-# Copy this to the root of your Hostinger hosting to fix download issues
+# Next.js compatible .htaccess file for PHP-wrapped app
+# This version preserves client-side routing while fixing content-type issues
 
 # Enable rewrite engine
 RewriteEngine On
 
 # Set the base for rewrites
 RewriteBase /
-
-# Force all service pages to have .html extension for Windows compatibility
-# Example: /ai-automation -> /ai-automation.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(ai-automation|business-process-automation|business-process-documentation)$ $1.html [R=301,L]
-
-# Force all service location pages to have .html extension
-# Example: /ai-automation/london -> /ai-automation/london.html
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(ai-automation|business-process-automation|business-process-documentation)/([^/]+)$ $1/$2.html [R=301,L]
 
 # If a file or directory exists, serve it directly
 RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -27,10 +15,10 @@ RewriteRule ^ - [L]
 # Direct access to static assets in the out directory
 RewriteRule ^out/(.*)$ out/$1 [L]
 
-# Send all other requests to index.php
+# Send all other requests to index.php - critical for Next.js client-side routing
 RewriteRule ^(.*)$ index.php [L]
 
-# Set proper MIME types
+# Set proper MIME types - without changing URL structure
 AddType application/javascript .js
 AddType text/css .css
 AddType image/svg+xml .svg
@@ -39,7 +27,7 @@ AddType application/json .json
 AddType text/html .html
 AddType text/html .htm
 
-# Force HTML response for service pages
+# Force HTML response for service pages without changing URLs
 <FilesMatch "\.(html|htm)$">
     ForceType text/html
     Header set Content-Type "text/html; charset=UTF-8"
@@ -50,9 +38,17 @@ AddType text/html .htm
     Header set X-UA-Compatible "IE=edge"
 </FilesMatch>
 
+# Set HTML headers for extensionless service URLs without redirecting
+<If "%{REQUEST_URI} =~ m#^/(ai-automation|business-process-automation|business-process-documentation)($|/)#">
+    Header set Content-Type "text/html; charset=UTF-8"
+    Header set Content-Disposition "inline"
+    Header set X-Content-Type-Options "nosniff"
+</If>
+
 # Browser caching
 <IfModule mod_expires.c>
     ExpiresActive On
+    ExpiresByType text/html "access plus 0 seconds"
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
