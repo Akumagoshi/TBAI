@@ -41,8 +41,8 @@ This project has been specially configured for static hosting on Hostinger. Here
 
 1. Clone the repository (if not already done):
    ```bash
-   git clone https://github.com/Akumagoshi/Website-4932.git
-   cd Website-4932
+   git clone https://github.com/Akumagoshi/TibsAI_Site.git
+   cd TibsAI_Site
    ```
 
 2. Install dependencies:
