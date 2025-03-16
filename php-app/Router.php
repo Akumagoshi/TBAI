@@ -38,6 +38,9 @@ class Router {
       // This could be a [service] route
       $service = $matches[1];
       if (file_exists(STATIC_PATH . '/' . $service . '.html')) {
+        // Explicitly set the content type and ensure inline display for service pages
+        header('Content-Type: text/html; charset=UTF-8');
+        header('Content-Disposition: inline');
         $this->serveFile('/' . $service . '.html');
         return;
       }
@@ -50,6 +53,9 @@ class Router {
       $location = $matches[2];
       
       if (file_exists(STATIC_PATH . '/' . $service . '/' . $location . '.html')) {
+        // Explicitly set the content type and ensure inline display for location pages
+        header('Content-Type: text/html; charset=UTF-8');
+        header('Content-Disposition: inline');
         $this->serveFile('/' . $service . '/' . $location . '.html');
         return;
       }
@@ -79,6 +85,8 @@ class Router {
     switch ($ext) {
       case 'html':
         header('Content-Type: text/html; charset=UTF-8');
+        // Force HTML to display inline in browser, not as a download
+        header('Content-Disposition: inline');
         break;
       case 'css':
         header('Content-Type: text/css; charset=UTF-8');
@@ -106,7 +114,20 @@ class Router {
         header('Content-Type: image/x-icon');
         break;
       default:
-        header('Content-Type: application/octet-stream');
+        // Check if file is actually HTML despite missing extension
+        if (is_readable($fullPath) && filesize($fullPath) > 0) {
+          $content = file_get_contents($fullPath, false, null, 0, 15);
+          if (stripos($content, '<!DOCTYPE html') === 0 || stripos($content, '<html') === 0) {
+            header('Content-Type: text/html; charset=UTF-8');
+            header('Content-Disposition: inline');
+            // Avoid falling through to default application/octet-stream
+            $ext = 'html';
+          } else {
+            header('Content-Type: application/octet-stream');
+          }
+        } else {
+          header('Content-Type: application/octet-stream');
+        }
     }
     
     // Set caching headers for static assets
