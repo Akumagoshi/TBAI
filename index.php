@@ -1,9 +1,12 @@
 <?php
-// Main entry point for the application
+// Set global headers for HTML content
+header('Content-Type: text/html; charset=UTF-8');
+header('Content-Disposition: inline');
+header('X-Content-Type-Options: nosniff');
+
+// Include bootstrap
 require_once __DIR__ . '/php-app/bootstrap.php';
 
-// Initialize the router
+// Initialize router
 $router = new App\Router();
-
-// Route the request to the appropriate static file
 $router->dispatch();
