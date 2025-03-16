@@ -1,0 +1,25 @@
+# Hostinger Node.js configuration for Next.js static export
+
+version: 1
+type: nodejs
+
+# Build configuration
+build:
+  # Build command to run
+  command: npm run build
+  # Directory with static files to serve
+  output_directory: out
+
+# Environment variables (for build time only)
+environment:
+  NEXT_PUBLIC_STATIC_MODE: 'true'
+  NODE_ENV: production
+
+# Node.js version
+nodejs:
+  version: 18
+
+# Optional settings
+settings:
+  # Don't build for PHP
+  skip_php_build: true

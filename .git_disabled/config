@@ -1,0 +1,20 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[user]
+	email = tiberiusai@example.com
+	name = Akumagoshi
+	email = your.email@example.com
+[remote "origin"]
+	url = https://github.com/Akumagoshi/TibsAI_Site.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "php-hostinger"]
+	vscode-merge-base = origin/master
+	remote = origin
+	merge = refs/heads/php-hostinger

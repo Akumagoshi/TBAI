@@ -1,0 +1,13 @@
+{
+  "name": "tiberius-ai/website",
+  "description": "TiberiusAI Website PHP Wrapper",
+  "type": "project",
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}

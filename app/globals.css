@@ -1,0 +1,285 @@
+@import "tailwindcss";
+
+:root {
+  --deep-blue: #0A0F25;
+  --blue: #0F1B46;
+  --neon-cyan: #00E5FF;
+  --vibrant-purple: #B026FF;
+  --deep-purple: #4E0D9A;
+  --deep-green: #00523D;
+  --text-light: #FFFFFF;
+  --text-dark: #0A0F25;
+  --light-gray: #F5F5F5;
+  --mid-gray: #9CA3AF;
+  --dark-gray: #374151;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.8);
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1);
+  }
+}
+
+/* Default styling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--deep-blue);
+  color: var(--text-light);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Animated gradient text */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--neon-cyan), var(--vibrant-purple));
+  background-size: 200% auto;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* Moving background */
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--deep-blue), var(--blue) 40%, var(--blue) 100%);
+  opacity: 0.8;
+  z-index: -2;
+}
+
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  z-index: -1;
+  animation: wave 25s linear infinite;
+}
+
+/* Section with floating elements */
+.floating-section {
+  position: relative;
+  z-index: 1;
+}
+
+.float-item {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-item:nth-child(2n) {
+  animation-delay: 1s;
+}
+
+.float-item:nth-child(3n) {
+  animation-delay: 2s;
+}
+
+/* Glow effects */
+.glow {
+  filter: drop-shadow(0 0 10px var(--neon-cyan));
+}
+
+.purple-glow {
+  filter: drop-shadow(0 0 10px var(--vibrant-purple));
+}
+
+/* Hover effects for cards and buttons */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 229, 255, 0.2);
+}
+
+/* Form input styles with animations */
+.form-input {
+  transition: all 0.3s ease;
+  border: 1px solid var(--mid-gray);
+  background-color: var(--deep-blue);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.form-input:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+}
+
+/* Form checkbox styles */
+input[type="checkbox"] {
+  cursor: pointer;
+  position: relative;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--mid-gray);
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  appearance: none;
+  background-color: var(--deep-blue);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+input[type="checkbox"]:hover {
+  border-color: var(--neon-cyan);
+}
+
+/* Form feedback animations */
+@keyframes form-success {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes form-error {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.form-success {
+  animation: form-success 0.3s ease-out forwards;
+}
+
+.form-error {
+  animation: form-error 0.5s ease-in-out;
+}
+
+/* Submit button hover effect */
+.submit-button {
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(176, 38, 255, 0.3);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Fix for scrolling background to prevent purple from encroaching */
+.scrolling-section {
+  background-color: var(--deep-blue);
+  background-image: linear-gradient(to bottom, var(--deep-blue), var(--blue) 40%, var(--blue) 100%);
+}
+
+/* Brand gradients for different uses */
+.brand-gradient-bg {
+  background-image: linear-gradient(to right, var(--neon-cyan), var(--vibrant-purple));
+}
+
+.brand-gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--neon-cyan), var(--vibrant-purple));
+}
+
+.brand-gradient-border {
+  border-image: linear-gradient(to right, var(--neon-cyan), var(--vibrant-purple)) 1;
+}
+
+/* Global button and link hover effects */
+a {
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--deep-purple);
+}
+
+/* More contrasting borders for all interactive elements */
+button, .btn, a.btn, [role="button"] {
+  border-width: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover, .btn:hover, a.btn:hover, [role="button"]:hover {
+  background-color: var(--deep-purple);
+  color: white;
+  border-color: white;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Add special styling for cards on hover */
+.card:hover, [class*="card"]:hover {
+  border-color: white;
+  box-shadow: 0 10px 25px rgba(0, 229, 255, 0.3);
+}
+
+/* Ensure all clickable elements have a hover cursor */
+a, button, .btn, [role="button"], .clickable {
+  cursor: pointer;
+}

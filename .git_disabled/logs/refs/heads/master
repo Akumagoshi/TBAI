@@ -1,0 +1,10 @@
+0000000000000000000000000000000000000000 b1dac55c937ab155331ed3084b9aaae280d6ecd9 Alex Robertson <robad9999@hotmail.com> 1742037631 +0000	commit (initial): Initial commit from Create Next App
+b1dac55c937ab155331ed3084b9aaae280d6ecd9 b44b0a649df820310c55b86aca83410c06862c07 Alex Robertson <robad9999@hotmail.com> 1742138827 +0000	commit: Update website for Hostinger deployment with static export configuration
+b44b0a649df820310c55b86aca83410c06862c07 14b08298d1df998c5c29eba966d52b95335e7812 Alex Robertson <robad9999@hotmail.com> 1742139733 +0000	commit: Add Hostinger deployment guide and fix ESLint issues for static export
+14b08298d1df998c5c29eba966d52b95335e7812 5f801ae14db387098cb77c47d4b185cf263a2450 Alex Robertson <robad9999@hotmail.com> 1742140732 +0000	commit: Add force-static directive to sitemap for static export compatibility
+5f801ae14db387098cb77c47d4b185cf263a2450 0554c4afab6b84cc18b6de48198d02db1bdb0cb0 Alex Robertson <robad9999@hotmail.com> 1742141065 +0000	commit: Add static export compatibility with static contact form alternative
+0554c4afab6b84cc18b6de48198d02db1bdb0cb0 7afd143cd8c81f6a99fe5539e6bce631397bb237 Alex Robertson <robad9999@hotmail.com> 1742141406 +0000	commit: Update Hostinger deployment guide with comprehensive instructions
+7afd143cd8c81f6a99fe5539e6bce631397bb237 3798942603ed5ddf7f8beb65cba1b09337aab991 Tiberius AI <tiberiusai@example.com> 1742143496 +0000	commit: Initial commit: TiberiusAI website ready for Hostinger deployment
+3798942603ed5ddf7f8beb65cba1b09337aab991 bc9cfcbd48c3917b2bcc0a469a380000bb334e13 Tiberius AI <tiberiusai@example.com> 1742143522 +0000	commit: Initial commit: TiberiusAI website ready for Hostinger deployment
+bc9cfcbd48c3917b2bcc0a469a380000bb334e13 3dd0d6d8a66921532b834f7a2331ddf3853484d6 Dave <your.email@example.com> 1742143720 +0000	commit: Initial commit: TiberiusAI website ready for Hostinger deployment
+3dd0d6d8a66921532b834f7a2331ddf3853484d6 2478b42872c0d9e2809304f1deadbc91857bfb66 Akumagoshi <your.email@example.com> 1742144952 +0000	commit: Add Hostinger deployment configuration files
