@@ -1,10 +1,23 @@
-# Apache configuration for PHP-wrapped Next.js application
+# Special .htaccess file for Windows browser compatibility
+# Copy this to the root of your Hostinger hosting to fix download issues
 
 # Enable rewrite engine
 RewriteEngine On
 
 # Set the base for rewrites
 RewriteBase /
+
+# Force all service pages to have .html extension for Windows compatibility
+# Example: /ai-automation -> /ai-automation.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(ai-automation|business-process-automation|business-process-documentation)$ $1.html [R=301,L]
+
+# Force all service location pages to have .html extension
+# Example: /ai-automation/london -> /ai-automation/london.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(ai-automation|business-process-automation|business-process-documentation)/([^/]+)$ $1/$2.html [R=301,L]
 
 # If a file or directory exists, serve it directly
 RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -22,29 +35,20 @@ AddType application/javascript .js
 AddType text/css .css
 AddType image/svg+xml .svg
 AddType application/json .json
+# Force Windows to recognize HTML files correctly
+AddType text/html .html
+AddType text/html .htm
 
-# Enable CORS and set HTML file handling
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-    
-    # Force HTML files to be displayed in browser, not downloaded
-    <FilesMatch "\.html$">
-        Header set Content-Type "text/html; charset=UTF-8"
-        Header set Content-Disposition "inline"
-    </FilesMatch>
-    
-    # Force service pages without extensions to be treated as HTML
-    <FilesMatch "^(ai-automation|business-process-automation|business-process-documentation)$">
-        Header set Content-Type "text/html; charset=UTF-8"
-        Header set Content-Disposition "inline"
-    </FilesMatch>
-    
-    # Force location pages to be treated as HTML
-    <FilesMatch "^([^/]+)/([^/]+)$">
-        Header set Content-Type "text/html; charset=UTF-8"
-        Header set Content-Disposition "inline"
-    </FilesMatch>
-</IfModule>
+# Force HTML response for service pages
+<FilesMatch "\.(html|htm)$">
+    ForceType text/html
+    Header set Content-Type "text/html; charset=UTF-8"
+    Header set Content-Disposition "inline"
+    Header unset Content-Encoding
+    # Windows-specific browser headers
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-UA-Compatible "IE=edge"
+</FilesMatch>
 
 # Browser caching
 <IfModule mod_expires.c>
